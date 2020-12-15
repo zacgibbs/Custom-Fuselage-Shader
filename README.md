@@ -9,7 +9,7 @@ The purpose of this project was to rewrite the orignal fuselage shader in Flight
 1) Download the project.
 2) Open the Flightgear root folder.
 3) Open the "NEW" folder.
-4) Drag the "/Shaders" folder into "/data"
+4) Drag the "/Shaders" folder into "/data", overwriting the original shader files.
 
 ## Issues
 
