@@ -1,3 +1,5 @@
+![alt text](https://i.imgur.com/9RGYkcz.png)
+
 # Custom Fuselage Shader
 
 The purpose of this project was to rewrite the orignal fuselage shader in FlightGear to be more attractive and akin to the graphical style or a commercial simulator. The project is still incomplete and has many issues but as I learn and experiment further I hope to eliminate as many of these issues as possible.
@@ -20,5 +22,3 @@ The purpose of this project was to rewrite the orignal fuselage shader in Flight
 * Lightmap's currently not working
 * Reflection's are static
 * Normal Mapping not yet included
-
-![alt text](https://i.imgur.com/9RGYkcz.png)
