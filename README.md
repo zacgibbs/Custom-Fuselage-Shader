@@ -1,4 +1,4 @@
-![alt text](https://i.imgur.com/9RGYkcz.png)
+![alt text](https://i.imgur.com/Z32h8hd.png)
 
 # Custom Fuselage Shader
 
