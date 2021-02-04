@@ -19,7 +19,7 @@ varying mat3    tbn;
 
 vec3 filter_combined (in vec3 color) ;
 
-varying	float	alpha;
+varying	float alpha;
 
 uniform int lightmap_enabled;
 uniform sampler2D BaseTex;
@@ -34,11 +34,6 @@ uniform samplerCube Environment;
 //varying float flogz;
 
 //float getShadowing();
-
-const float gaussRadius = 11;
-const float gaussFilter[11] = float[11](
-    0.0402,0.0623,0.0877,0.1120,0.1297,0.1362,0.1297,0.1120,0.0877,0.0623,0.0402
-);
 
 void main (){
 
@@ -83,14 +78,14 @@ void main (){
 
     //NORMAL MAPPING
 
-    vec3 pixelNormal = tbn * normalize(texture2D(NormalTex, gl_TexCoord[0].st).rgb * 2.0 - 0.9);
-    vec3 normalizedLightDirection = normalize(lightDir);
-    float lambert = max( 0.0, dot( pixelNormal, normalizedLightDirection ) );
-    vec4 normalzz = vec4( lambert, lambert, lambert, 1.0 );
+    //vec3 pixelNormal = tbn * normalize(texture2D(NormalTex, gl_TexCoord[0].st).rgb * 2.0 - 0.9);
+    //vec3 normalizedLightDirection = normalize(lightDir);
+    //float lambert = max( 0.0, dot( pixelNormal, normalizedLightDirection ) );
+    //vec4 normalzz = vec4( lambert, lambert, lambert, 1.0 );
 
     //NORMAL MAPPING
     //SPECULAR HIGHLIGHTS
-    float specularLevel = 2000;
+    float specularLevel = 1000;
     float specularLevel2 = texel.r * texel.g * texel.b * 2000;
     vec3 specular_light = vec3(1.0,1.0,1.0) * vec3(1.0); //SET THE COLOUR OF THE SPECULAR HIGHLIGHTS
     vec3 specular_color = vec3(specular_light) * pow(max(0.0, dot(n, -halfVector)), specularLevel) * 0.8;
@@ -141,10 +136,11 @@ void main (){
 
 
 
+	gl_FragColor = clamp(((vec4(finalfinalColor.rgb,0.15) * 1) + specularFinal + reflectionPower), 0.0, 1.0);
 
+	//vec4 colorAsjuster = color;
 
-    gl_FragColor = ((vec4(finalfinalColor.rgb,0.15) * 1) + specularFinal + reflectionPower);
-    //gl_FragColor = reflection;
+    //gl_FragColor = clamp(color,0.0,1.0);
 
 
 
@@ -155,13 +151,4 @@ void main (){
     //TEST FOR FRESNEL
     vec4 fresnelTest = mix(vec4(0.0,0.0,0.0,0.0),vec4(1.0,1.0,1.0,1.0),fresnel3);
 
-
-    //GAUSSIAN BLUR
-    vec2 uShift = vec2(2.0/1024,0.3/1024);
-    vec2 texCoord = gl_TexCoord[0].xy - float(int(gaussRadius/2)) * uShift;
-    vec3 color2 = vec3(0.0, 0.0, 0.0); 
-    for (int i=0; i<gaussRadius; ++i) { 
-        color2 += gaussFilter[i] * texture2D(BaseTex, texCoord).xyz;
-        texCoord += uShift;
-    }
 }
